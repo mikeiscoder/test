@@ -1,14 +1,74 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>
-      Geeks for geeks document
-    </title>
-  </head>
-  <body>
-    <div>GeeksforGeeks</div>
-    Checkout the GeeksforGeeks
-    <a href="www.youtube.com" alt="GeeksforGeeks youtube"> official </a>
-    youtube for the videoes on various courses.
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraksha Setu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body class="bg-gray-100">
+
+    <!-- Container -->
+    <div class="flex h-screen">
+        <!-- Left Panel -->
+        <div class="w-96 p-6 bg-white shadow-lg overflow-y-auto">
+            <h1 class="text-2xl font-bold text-blue-600 mb-4">Suraksha Setu</h1>
+
+            <!-- Guardians Section -->
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold mb-3">Guardians</h2>
+                <div class="flex items-center mb-4">
+                    <input type="tel" id="guardianPhone" class="border border-gray-300 rounded-md p-2 flex-1" placeholder="Guardian's Phone Number">
+                    <button onclick="addGuardian()" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Add</button>
+                </div>
+                <div id="guardiansList" class="space-y-2"></div>
+            </div>
+
+            <!-- Journey Section -->
+            <div class="mb-6">
+                <h2 class="text-xl font-semibold mb-3">Journey Details</h2>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <button onclick="selectTransport('walking')" class="flex flex-col items-center p-4 border rounded-md hover:bg-blue-50" data-icon="🚶">
+                        <span class="text-2xl">🚶</span>
+                        <span class="mt-1 text-sm">Walking</span>
+                    </button>
+                    <button onclick="selectTransport('car')" class="flex flex-col items-center p-4 border rounded-md hover:bg-blue-50" data-icon="🚗">
+                        <span class="text-2xl">🚗</span>
+                        <span class="mt-1 text-sm">Car</span>
+                    </button>
+                    <button onclick="selectTransport('autorickshaw')" class="flex flex-col items-center p-4 border rounded-md hover:bg-blue-50" data-icon="🛺">
+                        <span class="text-2xl">🛺</span>
+                        <span class="mt-1 text-sm">Auto</span>
+                    </button>
+                    <button onclick="selectTransport('bus')" class="flex flex-col items-center p-4 border rounded-md hover:bg-blue-50" data-icon="🚌">
+                        <span class="text-2xl">🚌</span>
+                        <span class="mt-1 text-sm">Bus</span>
+                    </button>
+                </div>
+                <input type="number" id="estimatedTime" placeholder="Estimated time (minutes)" class="w-full p-2 border rounded-md mb-2">
+                <p class="text-sm text-gray-600">Click on map to set destination or drag marker</p>
+            </div>
+
+            <!-- Controls -->
+            <div class="space-y-2">
+                <button id="startSharing" onclick="startSharing()" class="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">Start Sharing Location</button>
+                <button id="stopSharing" onclick="stopSharing()" class="w-full px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700" disabled>Stop Sharing</button>
+                <button id="sosButton" onclick="triggerSOS()" class="w-full px-4 py-2 bg-yellow-500 text-black font-bold rounded-md hover:bg-yellow-600" disabled>SOS</button>
+            </div>
+
+            <!-- Status Section -->
+            <div class="mt-4">
+                <div id="timer" class="text-2xl text-center font-mono text-blue-600">00:00:00</div>
+                <div id="alerts" class="mt-2 space-y-2"></div>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div id="map" class="flex-1"></div>
+    </div>
+
+    <script src="/static/main.js"></script>
+</body>
 </html>
